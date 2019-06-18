@@ -21,8 +21,8 @@ FC=gfortran
 AS=as
 
 # Macros
-CND_PLATFORM=GNU-Linux
-CND_DLIB_EXT=so
+CND_PLATFORM=Cygwin-Windows
+CND_DLIB_EXT=dll
 CND_CONF=Debug
 CND_DISTDIR=dist
 CND_BUILDDIR=build
@@ -39,7 +39,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/ListaCircular.o \
 	${OBJECTDIR}/ListaDoble.o \
 	${OBJECTDIR}/Nodo.o \
+	${OBJECTDIR}/NodoCaja.o \
 	${OBJECTDIR}/Pila.o \
+	${OBJECTDIR}/SuperMarket.o \
 	${OBJECTDIR}/main.o
 
 
@@ -61,11 +63,11 @@ LDLIBSOPTIONS=
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
-	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/supermercado
+	"${MAKE}"  -f nbproject/Makefile-${CND_CONF}.mk ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/supermarketmanager.exe
 
-${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/supermercado: ${OBJECTFILES}
+${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/supermarketmanager.exe: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/supermercado ${OBJECTFILES} ${LDLIBSOPTIONS}
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/supermarketmanager ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/Cola.o: Cola.cpp
 	${MKDIR} -p ${OBJECTDIR}
@@ -87,10 +89,20 @@ ${OBJECTDIR}/Nodo.o: Nodo.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Nodo.o Nodo.cpp
 
+${OBJECTDIR}/NodoCaja.o: NodoCaja.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NodoCaja.o NodoCaja.cpp
+
 ${OBJECTDIR}/Pila.o: Pila.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pila.o Pila.cpp
+
+${OBJECTDIR}/SuperMarket.o: SuperMarket.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SuperMarket.o SuperMarket.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}

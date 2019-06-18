@@ -21,6 +21,7 @@ public:
     Cola();
     void encolar (Nodo *nodo);
     Nodo* descolar ();
+    bool estaVacia();
 };
 
 

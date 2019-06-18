@@ -22,6 +22,7 @@ public:
     void apilar (Nodo *nodo);
     Nodo* desapilar ();
     void imprimirDatos();
+    bool estaVacia();
 };
 
 

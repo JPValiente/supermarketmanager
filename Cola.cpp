@@ -32,6 +32,13 @@ Nodo* Cola::descolar(){
     }
 }
 
+bool Cola::estaVacia() {
+    if(inicio == nullptr && fin == nullptr) {
+        return true;
+    }
+    return false;
+}
+
 
 
 

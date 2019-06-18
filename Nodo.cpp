@@ -10,3 +10,11 @@ Nodo::Nodo(int id, void* info){
     this->id = id;
     this->info = info;
 }
+
+void* Nodo::getInfo() {
+    return this->info;
+}
+
+void Nodo::setInfo(Nodo* info){
+    this->info = info;
+}

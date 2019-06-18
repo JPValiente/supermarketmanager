@@ -1,7 +1,7 @@
 #ifndef NODOCAJA_H
 #define NODOCAJA_H
 
-#include "Nodo.h"
+#include "NodoCaja.h"
 
 class NodoCaja {
 public:
@@ -9,10 +9,14 @@ public:
     int tiempoDeServicio;
     bool ocupado;
     Nodo *cliente;
-    Nodo *carreta;
     NodoCaja *anterior;
     NodoCaja *siguiente;
     NodoCaja(int id);
+    void setCliente(Nodo *cliente);
+    void setStatus(bool flag);
+    bool estaOcupado();
+    Nodo* getCliente();
+    void vaciarCaja();
     
 };
 

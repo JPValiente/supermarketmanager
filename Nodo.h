@@ -14,6 +14,7 @@
 #ifndef NODO_H
 #define NODO_H
 
+//En el apuntador de info, en el caso de clientes, se va a guardar la carreta para optimizar codigo
 class Nodo {
 public:
     int id;
@@ -22,6 +23,7 @@ public:
     Nodo *siguiente;
     Nodo(int id,void*info);
     void* getInfo();
+    void setInfo(Nodo *info);
 };
 
 
