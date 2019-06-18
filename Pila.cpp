@@ -8,6 +8,10 @@ using namespace std;
 
 Nodo *tope,*fondo;
 
+
+Pila::Pila(){
+    
+}
 void Pila::apilar(Nodo*nodo){
     if(tope == nullptr && fondo == nullptr) {
         fondo = tope =  nodo;

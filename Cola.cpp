@@ -9,7 +9,9 @@ using namespace std;
 Nodo *inicio,*fin;
 
 
-
+Cola::Cola() {
+    
+}
 void Cola::encolar(Nodo*nodo){
     if(inicio == nullptr && fin == nullptr) {
         inicio = fin =  nodo;

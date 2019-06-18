@@ -14,13 +14,14 @@
 #ifndef LISTACIRCULAR_H
 #define LISTACIRCULAR_H
 
+#include "Nodo.h"
 class ListaCircular{
 public:
     Nodo *inicio;
     Nodo *fin;
     int totalElementos;
     ListaCircular();
-    void insertar();
+    void insertar(Nodo* nodo);
     void borrar(int id);
     int estaVacia();
 };

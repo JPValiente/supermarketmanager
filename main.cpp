@@ -19,6 +19,8 @@
 #include "Nodo.h"
 #include "Pila.h"
 #include "Cola.h"
+#include "ListaCircular.h"
+#include "ListaDoble.h"
 using namespace std;
 Nodo* crearNodo(int,void*);
 /*
@@ -26,8 +28,11 @@ Nodo* crearNodo(int,void*);
  */
 int main(int argc, char** argv) {
     int dato = 5;
-    Pila *pila;
-    Cola *cola;
+    Pila *pila = new Pila();
+    Cola *cola = new Cola();
+    ListaCircular* listacircular = new ListaCircular();
+    ListaDoble* listadoble = new ListaDoble();
+    
     Nodo *nodo1 = crearNodo(1,&dato);
     Nodo *nodo2 = crearNodo(2,&dato);
     Nodo *nodo3 = crearNodo(3,&dato);

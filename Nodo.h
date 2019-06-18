@@ -21,7 +21,7 @@ public:
     Nodo *anterior;
     Nodo *siguiente;
     Nodo(int id,void*info);
-    
+    void* getInfo();
 };
 
 

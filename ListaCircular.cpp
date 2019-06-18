@@ -14,8 +14,8 @@ ListaCircular::ListaCircular(){
     this->totalElementos = 0;
 }
 
-ListaCircular::insertar(Nodo *nodo){
-    if(inicio == nullptr == fin){
+void ListaCircular::insertar(Nodo *nodo){
+    if(estaVacia() == 1){
         inicio = fin = nodo;
         inicio->siguiente = fin;
         inicio->anterior = fin;
@@ -30,7 +30,7 @@ ListaCircular::insertar(Nodo *nodo){
     this->totalElementos = this->totalElementos + 1;
 }
 
-ListaCircular::borrar(int id){
+void ListaCircular::borrar(int id){
     if(estaVacia() == 1){
         cout<<"Lista Circular Vacia";
     } else {
@@ -65,8 +65,8 @@ ListaCircular::borrar(int id){
     }
 }
 
-ListaCircular::estaVacia(){
-    if(inicio == fin == nullptr){
+int ListaCircular::estaVacia(){
+    if(inicio == nullptr && fin == nullptr){
         return 1;
     } else {
         return 0;

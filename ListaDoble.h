@@ -14,13 +14,15 @@
 #ifndef LISTADOBLE_H
 #define LISTADOBLE_H
 
+#include "NodoCaja.h"
+
 class ListaDoble{
 public:
-    Nodo *inicio;
-    Nodo *fin;
+    NodoCaja *inicio;
+    NodoCaja *fin;
     int totalElementos;
-    ListaCircular();
-    void insertar();
+    ListaDoble();
+    void insertar(NodoCaja* nodo);
     void borrar(int id);
     int estaVacia();
 };

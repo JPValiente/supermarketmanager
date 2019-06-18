@@ -8,7 +8,9 @@
       <itemPath>ListaCircular.h</itemPath>
       <itemPath>ListaDoble.h</itemPath>
       <itemPath>Nodo.h</itemPath>
+      <itemPath>NodoCaja.h</itemPath>
       <itemPath>Pila.h</itemPath>
+      <itemPath>SuperMarket.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
                    displayName="Resource Files"
@@ -62,9 +64,13 @@
       </item>
       <item path="Nodo.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="NodoCaja.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Pila.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Pila.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SuperMarket.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
@@ -105,9 +111,13 @@
       </item>
       <item path="Nodo.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="NodoCaja.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="Pila.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="Pila.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="SuperMarket.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
