@@ -16,15 +16,20 @@ ListaDoble::ListaDoble(){
 void ListaDoble::insertar(NodoCaja *nodo){
     if(estaVacia() == 1){
         this->inicio = this->fin = nodo;
+        cout<<"Insertando al inicio"<<endl;
     } else {
         if(nodo->id <= inicio->id){
             nodo->siguiente = inicio;
             inicio->anterior = nodo;
             inicio = nodo;
+//            cout<<"Insertando antes del inicio"<<endl;
         } else if (nodo->id >= fin->id) {
             fin->siguiente = nodo;
             nodo->anterior = fin;
             fin = nodo;
+////            cout<<"Insertando despues del final"<<endl;
+////            cout<<"Soy la caja: "<<nodo->id<<" y mi anterior es: "<<nodo->anterior->id<<endl;
+////            cout<<"Soy la caja anterior: "<<nodo->anterior->id<<" y mi siguiente es: "<<nodo->anterior->siguiente->id<<endl;
         } else {
             NodoCaja *aux = inicio;
             while(aux->siguiente != nullptr){
@@ -38,6 +43,7 @@ void ListaDoble::insertar(NodoCaja *nodo){
             nodo->anterior = aux;
             nodo->siguiente = siguiente;
             siguiente->anterior = nodo;
+//            cout<<"Me inserte entre "<<nodo->anterior->id<<" y "<<nodo->siguiente->id<<endl;
         }
     }
     this->totalElementos = this->totalElementos + 1;

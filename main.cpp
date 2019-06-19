@@ -17,9 +17,10 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <thread>
-
+#include <ctime>
 //Headers
 #include "Nodo.h"
+#include "NodoCaja.h"
 #include "Pila.h"
 #include "Cola.h"
 #include "ListaCircular.h"
@@ -30,6 +31,7 @@ using namespace std;
 //Declaracion de funciones
 void asignarClientes();
 void start();
+void llenar(int,int,int);
 void simularSupermercado(int,int,int);
 
 //Declaracion de variables globales
@@ -41,15 +43,25 @@ SuperMarket* supermercado;
  * 
  */
 int main(int argc, char** argv) {
-    cout<<"Termino el hilo"<<endl;
+    //start();
+    supermercado = new SuperMarket();
+    start();
     return 0;
 }
 
 void simularSupermercado(int clientes, int cajas, int carretas){
-    cout<<"Comenzando la simulacion";
-    int conteo = 1;
+    cout<<"Comenzando la simulacion"<<endl<<endl<<endl;
+    int conteo = 0;
+    clientes = supermercado->clientes->total;
+    cout<<"Total de clientes adentro: "<<clientes<<endl;
     while(clientes > 0){
-        cout<<"######### Paso "<<1<<" #########"<<endl<<endl;
+        conteo++;
+        clientes = supermercado->clientes->total + supermercado->clientesComprando->totalElementos + supermercado->colaDePagos->total;
+        usleep(100000);
+        cout<<endl<<endl<<endl<<endl<<"Clientes en cola de espera: "<<clientes<<endl;
+        cout<<"Clientes comprando: "<<supermercado->clientesComprando->totalElementos<<endl;
+        cout<<"Clientes en cola de pagos: "<<supermercado->colaDePagos->total<<endl;
+        cout<<"######### Paso "<<conteo<<" #########"<<endl<<endl;
         if(supermercado->hayCarretas()){
             Nodo* carreta = supermercado->sacarCarreta();
             Nodo* cliente = supermercado->clientes->descolar();
@@ -81,7 +93,31 @@ void start(){
     cin>>cajas;
     cout<<"Cuantas carretas estaran disponibles?"<<endl;
     cin>>carretas;
+    llenar(clientes,cajas,carretas);
     simularSupermercado(clientes,cajas,carretas);
+}
+
+void llenar(int clientes,int cajas, int carretas){
+    cout<<"Cargando"<<endl;
+    Nodo* cliente;
+    Nodo* carreta;
+    NodoCaja* caja;
+    for(int i = 1; i <= clientes; i++){
+        cliente = supermercado->crearCliente(i);
+        supermercado->agregarClienteAEspera(cliente);
+    }
+    cout<<"."<<endl;
+    for(int i = 1; i <= cajas; i++){
+        caja = supermercado->crearCaja(i);
+        supermercado->agregarCajaAlSistema(caja);
+    }
+    cout<<".."<<endl;
+    for(int i = 1; i <= carretas; i++){
+        carreta = supermercado->crearCarreta(i);
+        supermercado->guardarCarreta(carreta);
+    }
+    cout<<"..."<<endl;
+    
 }
 
 

@@ -19,6 +19,7 @@ public:
     Nodo *inicio;
     Nodo *fin;
     Cola();
+    int total;
     void encolar (Nodo *nodo);
     Nodo* descolar ();
     bool estaVacia();

@@ -40,6 +40,7 @@ void NodoCaja::vaciarCaja() {
 bool NodoCaja::cumplioTiempo() {
     time_t ahorita  = time(0);
     if(ahorita <= this->tiempoLimite){
+        cout<<"Tiempo valido"<<endl;
         return true;
     }
     return false;

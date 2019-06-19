@@ -11,7 +11,7 @@ Nodo *tope,*fondo;
 
 
 Pila::Pila(){
-    
+    tope = fondo = nullptr;
 }
 void Pila::apilar(Nodo*nodo){
     if(tope == nullptr && fondo == nullptr) {

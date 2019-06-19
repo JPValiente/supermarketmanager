@@ -23,15 +23,20 @@ void SuperMarket::agregarClienteAEspera(Nodo* cliente){
 }
 
 SuperMarket::SuperMarket() {
-    
+    clientes = new Cola();
+    pilaCarreta1 = new Pila();
+    pilaCarreta2 = new Pila();
+    clientesEnEspera = new Cola();
+    colaDePagos = new Cola();
+    clientesComprando = new ListaCircular();
+    cajas = new ListaDoble();
 }
 
 
 bool SuperMarket::hayCarretas(){
     Nodo *carretaSaliendo;
-    if(!pilaCarreta1->estaVacia()) {
-    } else if(!pilaCarreta2->estaVacia()){
-    } else {
+    if(!pilaCarreta1->estaVacia() || !pilaCarreta2->estaVacia()) {
+    }  else {
         cout<<"No hay carretas disponibles en este momento, cliente en espera"<<endl;
         return false;
     }
@@ -55,6 +60,7 @@ Nodo* SuperMarket::sacarCarreta(){
 
 void SuperMarket::asignarCarretaACliente(Nodo* cliente,Nodo* carreta){
     cliente->info = carreta;
+    cout<<"Carreta "<<carreta->id<<" fue tomada por el cliente "<<cliente->id<<endl;
 }
 
 /*
@@ -70,7 +76,7 @@ if(clientes->estaVacia()){
 Nodo* SuperMarket::sacarClienteDeCompras(){
     int totalClientes = this->clientesComprando->totalElementos;
     srand((int)time(0));
-    int random = (rand() % 100) + 1;
+    int random = (rand() % 10) + 1;
     if(random <= totalClientes) {
         Nodo* cliente = clientesComprando->borrar(random);
         return cliente;
@@ -90,6 +96,7 @@ void SuperMarket::agregarACompras(Nodo* cliente){
 }
 
 bool SuperMarket::guardarCarreta(Nodo* carreta){
+    sleep(0);
     srand((int)time(0));
     int pila = (rand() % 2) + 1;
     if(pila == 1){
@@ -127,11 +134,13 @@ NodoCaja* SuperMarket::asignarClienteACaja(){
 }
 
 void SuperMarket::atenderCajas(){
-    sleep(200);
+    sleep(1);
     NodoCaja* caja = cajas->inicio;
-    while(caja != nullptr){
-        if(caja->cumplioTiempo()){
+    while(caja->siguiente != nullptr){
+        cout<<"Atendiendo caja "<<caja->id<<endl;
+        if(caja->cumplioTiempo() && caja->ocupado){ //Valida al instante, no espera el tiempo
             Nodo* carreta = (Nodo*)caja->cliente->info;
+            cout<<"ID de carreta: "<<carreta->id;
             cout<<"Cliente: "<<caja->cliente->id<<" atendido en caja "<<caja->id<<"."<<endl;
             caja->vaciarCaja();
             this->guardarCarreta(carreta);
@@ -159,4 +168,5 @@ Nodo* SuperMarket::crearCarreta(int id){
 
 void SuperMarket::agregarCajaAlSistema(NodoCaja* caja){
     this->cajas->insertar(caja);
+    cout<<"Caja numero "<<caja->id<<" disponible en el sistema"<<endl;
 }
