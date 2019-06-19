@@ -1,6 +1,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <thread>
 
 #include "ListaDoble.h"
 #include "NodoCaja.h"
@@ -69,6 +70,7 @@ void ListaDoble::borrar(int id){
             }
             
         }
+        totalElementos = totalElementos - 1;
     }
 }
 

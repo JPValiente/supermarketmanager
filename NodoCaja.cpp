@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <thread>
 
 using namespace std;
 
@@ -16,11 +17,11 @@ void NodoCaja::setCliente(Nodo* cliente){
     this->cliente = cliente;
 }
 
-void NodoCaja::estaOcupado(){
+bool NodoCaja::estaOcupado(){
     return this->ocupado;
 }
 
-void NodoCaja::getCliente(){
+Nodo* NodoCaja::getCliente(){
     return this->cliente;
 }
 

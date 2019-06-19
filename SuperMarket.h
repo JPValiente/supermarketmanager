@@ -32,18 +32,25 @@ public:
     ListaCircular *clientesComprando; //Clientes adentro del supermercado
     ListaDoble *cajas; //Lista doble de las cajas que estan disponibles para atender;
     
-    void agregarACompras(Nodo* cliente); //El cliente entra a una lista circular, para salir hay que generar un numero aleatorio del 0 al 100
-    //Si el numero generado es mayor al tamaño de la lista, entonces ningun cliente pasa a la cola de pago. Caso contrario, el indice del cliente sale.
-    void agregarClienteAEspera(Nodo* cliente); //Los clientes entran directo a tomar una carreta, si no hay carretas, les toca esperar
-    bool hayCarretas(); //Retorna verdadero si hay carretas disponibles.
-    bool guardarCarreta(Nodo *carreta); //Al finalizar la compra del cliente, la carreta se guarda en la pila. Se hace un aleatorio de 1 y 2, que corresponde a la pila
-    Nodo* sacarCarreta(); //Se hace pop a la pila de la carreta
-    bool encolarCliente(Nodo* cliente); //Se encola gente a la cola de pagos, en caso que las cajas esten llenas
-    Nodo* sacarCliente(); //Saca al cliente de la cola de pagos y finaliza la venta;
-    void finalizarCompra(); //Finaliza la compra, llama al metodo sacarCliente() y guarda la carreta;
+    void agregarACompras(Nodo* cliente); /*#El cliente entra a una lista circular, para salir hay que generar un numero aleatorio del 0 al 100 Si el numero generado es mayor al tamaño de la lista, entonces ningun cliente pasa a la cola de pago. Caso contrario, el indice del cliente sale.*/
+    
+    void agregarClienteAEspera(Nodo* cliente); //#Los clientes entran directo a tomar una carreta, si no hay carretas, les toca esperar
+    bool hayCarretas(); //#Retorna verdadero si hay carretas disponibles.
+    Nodo* sacarCarreta(); //Retorna la carreta
+    bool guardarCarreta(Nodo *carreta); //#Al finalizar la compra del cliente, la carreta se guarda en la pila. Se hace un aleatorio de 1 y 2, que corresponde a la pila
+    Nodo* sacarClienteDeCompras(); //#Busca al cliente, lo saca de la lista circular y devuelve ese cliente
+    bool encolarCliente(Nodo* cliente); //#Se encola gente a la cola de pagos, en caso que las cajas esten llenas
+    void agregarCajaAlSistema(NodoCaja* caja); //#Añade la caja a la lista doble
+    
+    
     void graficarSistema(); //Grafica todo el sistema, es recomendable usar subgraphs.
-    Nodo* crearCliente(int id);
-    NodoCaja* crearCaja(int id);
+    
+    void asignarCarretaACliente(Nodo* carreta,Nodo* cliente);
+    NodoCaja* asignarClienteACaja(); //#Asigna un cliente a una caja
+    Nodo* crearCliente(int id); //#Crea en memoria un nuevo cliente
+    Nodo* crearCarreta(int id); //#Crea en memoria una carreta
+    NodoCaja* crearCaja(int id); //#Crea en memoria una caja
+    void atenderEnCaja(NodoCaja* caja); //Atiende al cliente en la caja
     
 };
 

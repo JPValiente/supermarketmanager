@@ -22,7 +22,7 @@ public:
     int totalElementos;
     ListaCircular();
     void insertar(Nodo* nodo);
-    void borrar(int id);
+    Nodo* borrar(int id);
     int estaVacia();
 };
 

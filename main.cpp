@@ -15,40 +15,75 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <unistd.h>
+#include <thread>
 
+//Headers
 #include "Nodo.h"
 #include "Pila.h"
 #include "Cola.h"
 #include "ListaCircular.h"
 #include "ListaDoble.h"
+#include "SuperMarket.h"
 using namespace std;
-Nodo* crearNodo(int,void*);
+
+//Declaracion de funciones
+void asignarClientes();
+void start();
+void simularSupermercado(int,int,int);
+
+//Declaracion de variables globales
+SuperMarket* supermercado;
+
+//Hilos
+
 /*
  * 
  */
 int main(int argc, char** argv) {
-    int dato = 5;
-    Pila *pila = new Pila();
-    Cola *cola = new Cola();
-    ListaCircular* listacircular = new ListaCircular();
-    ListaDoble* listadoble = new ListaDoble();
-    
-    Nodo *nodo1 = crearNodo(1,&dato);
-    Nodo *nodo2 = crearNodo(2,&dato);
-    Nodo *nodo3 = crearNodo(3,&dato);
-    pila->apilar(nodo1);
-    pila->apilar(nodo2);
-    pila->apilar(nodo3);
-    pila->imprimirDatos();
-    cout<<"Nueva salida"<<endl;
-    Nodo* nodo4 = pila->desapilar();
-    cout<<"Nodo que salio: "<<nodo4->id<<endl;
-    pila->imprimirDatos();
+    cout<<"Termino el hilo"<<endl;
     return 0;
 }
 
-Nodo* crearNodo(int id,void *info){
-    Nodo* nuevoNodo = new Nodo(id,info);
-    return nuevoNodo;
+void simularSupermercado(int clientes, int cajas, int carretas){
+    cout<<"Comenzando la simulacion";
+    int conteo = 1;
+    while(clientes > 0){
+        cout<<"######### Paso "<<1<<" #########"<<endl<<endl;
+        if(supermercado->hayCarretas()){
+            Nodo* carreta = supermercado->sacarCarreta();
+            Nodo* cliente = supermercado->clientes->descolar();
+            supermercado->asignarCarretaACliente(cliente,carreta);
+            supermercado->agregarACompras(cliente);
+            
+            Nodo* clienteSaliente = supermercado->sacarClienteDeCompras();
+            if(clienteSaliente != nullptr){
+                supermercado->encolarCliente(clienteSaliente);
+                NodoCaja* caja = supermercado->asignarClienteACaja();
+                if(caja != nullptr){
+                    supermercado->atenderEnCaja(caja); //Aqui se combina de una vez el guardar la carreta, en liberar al cliente.
+                }   
+            }
+        } else {
+            
+        }
+    }
+    
+    
 }
+
+void start(){
+    int clientes,cajas,carretas;
+    supermercado = new SuperMarket();
+    cout<<"Cuantos clientes entraran?"<<endl;
+    cin>>clientes;
+    cout<<"Cuantas cajas estaran disponibles?"<<endl;
+    cin>>cajas;
+    cout<<"Cuantas carretas estaran disponibles?"<<endl;
+    cin>>carretas;
+    simularSupermercado(clientes,cajas,carretas);
+}
+
+
+
 

@@ -2,7 +2,7 @@
 #define NODOCAJA_H
 
 #include "NodoCaja.h"
-
+#include "Nodo.h"
 class NodoCaja {
 public:
     int id;

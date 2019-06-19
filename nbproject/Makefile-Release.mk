@@ -39,7 +39,9 @@ OBJECTFILES= \
 	${OBJECTDIR}/ListaCircular.o \
 	${OBJECTDIR}/ListaDoble.o \
 	${OBJECTDIR}/Nodo.o \
+	${OBJECTDIR}/NodoCaja.o \
 	${OBJECTDIR}/Pila.o \
+	${OBJECTDIR}/SuperMarket.o \
 	${OBJECTDIR}/main.o
 
 
@@ -87,10 +89,20 @@ ${OBJECTDIR}/Nodo.o: Nodo.cpp
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Nodo.o Nodo.cpp
 
+${OBJECTDIR}/NodoCaja.o: NodoCaja.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/NodoCaja.o NodoCaja.cpp
+
 ${OBJECTDIR}/Pila.o: Pila.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pila.o Pila.cpp
+
+${OBJECTDIR}/SuperMarket.o: SuperMarket.cpp
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/SuperMarket.o SuperMarket.cpp
 
 ${OBJECTDIR}/main.o: main.cpp
 	${MKDIR} -p ${OBJECTDIR}

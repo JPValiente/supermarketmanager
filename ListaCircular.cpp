@@ -1,6 +1,7 @@
 #include<iostream>
 #include<stdio.h>
 #include<stdlib.h>
+#include <thread>
 
 #include "ListaCircular.h"
 #include "Nodo.h"
@@ -30,19 +31,23 @@ void ListaCircular::insertar(Nodo *nodo){
     this->totalElementos = this->totalElementos + 1;
 }
 
-void ListaCircular::borrar(int id){
+Nodo* ListaCircular::borrar(int id){
     if(estaVacia() == 1){
         cout<<"Lista Circular Vacia";
     } else {
-        
+        Nodo* auxiliar;
         if(inicio == fin && inicio->id == id) {
+            auxiliar = inicio;
             inicio = fin = nullptr;
+            
         } else {
             if(inicio->id == id){
+                auxiliar = inicio;
                 fin = inicio->siguiente;
                 inicio->siguiente = fin;
                 inicio = inicio->siguiente;
             } else if(fin->id == id) {
+                auxiliar = fin;
                 fin = fin->anterior;
                 fin->siguiente = inicio;
                 inicio->anterior = fin;
@@ -59,9 +64,12 @@ void ListaCircular::borrar(int id){
                 Nodo* siguiente = aux->siguiente;
                 anterior->siguiente = siguiente;
                 siguiente->anterior = anterior;
+                auxiliar = aux;
             }
             
         }
+        this->totalElementos = this->totalElementos - 1;
+        return auxiliar;
     }
 }
 

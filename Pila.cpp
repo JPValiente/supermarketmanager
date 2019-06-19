@@ -3,6 +3,7 @@
 #include"Pila.h"
 #include "Nodo.h"
 #include<iostream>
+#include <thread>
 
 using namespace std;
 
@@ -44,4 +45,11 @@ void Pila::imprimirDatos(){
         aux = aux->siguiente;
     }
     cout<<"ID: "<<aux->id<<endl;
+}
+
+bool Pila::estaVacia() {
+    if(tope == nullptr && fondo == nullptr) {
+        return true;
+    }
+    return false;
 }
