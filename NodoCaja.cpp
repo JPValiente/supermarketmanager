@@ -3,13 +3,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <iostream>
+#include <ctime>
 #include <thread>
 
 using namespace std;
 
 NodoCaja::NodoCaja(int id){
+    time_t  now = time(0);
     this->id = id;
-    this->tiempoDeServicio = 1;
+    this->tiempoDeServicio = now;
+    this->tiempoLimite = now + 60;
     this->ocupado = false;
 }
 
@@ -32,4 +35,12 @@ void NodoCaja::setStatus(bool flag){
 void NodoCaja::vaciarCaja() {
     this->ocupado = false;
     this->cliente = nullptr;
+}
+
+bool NodoCaja::cumplioTiempo() {
+    time_t ahorita  = time(0);
+    if(ahorita <= this->tiempoLimite){
+        return true;
+    }
+    return false;
 }

@@ -6,7 +6,8 @@
 class NodoCaja {
 public:
     int id;
-    int tiempoDeServicio;
+    long tiempoDeServicio;
+    long tiempoLimite;
     bool ocupado;
     Nodo *cliente;
     NodoCaja *anterior;
@@ -17,6 +18,7 @@ public:
     bool estaOcupado();
     Nodo* getCliente();
     void vaciarCaja();
+    bool cumplioTiempo();
     
 };
 

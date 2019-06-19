@@ -50,7 +50,7 @@ public:
     Nodo* crearCliente(int id); //#Crea en memoria un nuevo cliente
     Nodo* crearCarreta(int id); //#Crea en memoria una carreta
     NodoCaja* crearCaja(int id); //#Crea en memoria una caja
-    void atenderEnCaja(NodoCaja* caja); //Atiende al cliente en la caja
+    void atenderCajas(); //#Atiende al cliente en la caja
     
 };
 

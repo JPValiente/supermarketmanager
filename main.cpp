@@ -61,7 +61,7 @@ void simularSupermercado(int clientes, int cajas, int carretas){
                 supermercado->encolarCliente(clienteSaliente);
                 NodoCaja* caja = supermercado->asignarClienteACaja();
                 if(caja != nullptr){
-                    supermercado->atenderEnCaja(caja); //Aqui se combina de una vez el guardar la carreta, en liberar al cliente.
+                    supermercado->atenderCajas(); //Aqui se combina de una vez el guardar la carreta, en liberar al cliente.
                 }   
             }
         } else {

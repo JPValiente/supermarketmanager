@@ -126,12 +126,19 @@ NodoCaja* SuperMarket::asignarClienteACaja(){
     
 }
 
-void SuperMarket::atenderEnCaja(NodoCaja* caja){
-    sleep(caja->tiempoDeServicio);
-    Nodo* carreta = (Nodo*)caja->cliente->info;
-    cout<<"Cliente: "<<caja->cliente->id<<" atendido en caja "<<caja->id<<"."<<endl;
-    caja->vaciarCaja();
-    this->guardarCarreta(carreta);
+void SuperMarket::atenderCajas(){
+    sleep(200);
+    NodoCaja* caja = cajas->inicio;
+    while(caja != nullptr){
+        if(caja->cumplioTiempo()){
+            Nodo* carreta = (Nodo*)caja->cliente->info;
+            cout<<"Cliente: "<<caja->cliente->id<<" atendido en caja "<<caja->id<<"."<<endl;
+            caja->vaciarCaja();
+            this->guardarCarreta(carreta);
+        }
+        caja = caja->siguiente;
+    }
+    
 }
 
 
