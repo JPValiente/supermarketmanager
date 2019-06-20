@@ -9,12 +9,14 @@
 #include <ctime>
 #include <unistd.h>
 #include <thread>
+#include <fstream>
 //#include <pthread.h>
 #include "SuperMarket.h"
 #include "Pila.h"
 #include "Cola.h"
 #include "ListaDoble.h"
 #include "ListaCircular.h"
+#include <string>
 
 using namespace std;
 
@@ -75,9 +77,15 @@ if(clientes->estaVacia()){
 */
 Nodo* SuperMarket::sacarClienteDeCompras(){
     int totalClientes = this->clientesComprando->totalElementos;
+    int total = this->clientesComprando->total;
     srand((int)time(0));
     int random = (rand() % 10) + 1;
-    if(random <= totalClientes) {
+    cout<<"Numero generado "<<random<<endl;
+    
+    if(random <= total && clientesComprando->buscarNodo(random) != nullptr) {
+        
+        cout<<"El cliente"<<random<<" salio de la lista de compras"<<endl;
+        
         Nodo* cliente = clientesComprando->borrar(random);
         return cliente;
     } else {
@@ -169,4 +177,172 @@ Nodo* SuperMarket::crearCarreta(int id){
 void SuperMarket::agregarCajaAlSistema(NodoCaja* caja){
     this->cajas->insertar(caja);
     cout<<"Caja numero "<<caja->id<<" disponible en el sistema"<<endl;
+}
+
+void SuperMarket::graficar(){
+    cout<<"Graficando..."<<endl;
+    string salida = "";
+    salida = salida + "digraph G {\n";
+    //cout<<"Graficando clientes..."<<endl;
+    salida = salida + graficarClientes();
+    //cout<<"Graficando carretas 1..."<<endl;
+    salida = salida + graficarCarretas1();
+    //cout<<"Graficando carretas 2..."<<endl;
+    salida = salida + graficarCarretas2();
+    //cout<<"Graficando cola de pagos..."<<endl;
+    salida = salida + graficarColaDePagos();
+    //cout<<"Graficando clientes comprando..."<<endl;
+    salida = salida + graficarClientesComprando();
+    //cout<<"Graficando cajas..."<<endl;
+    salida = salida + graficarCajas();
+    salida = salida + "\n}";
+    //cout<<"Terminando de graficar"<<endl;
+    graphviz(salida);   
+}
+
+string SuperMarket::graficarClientes(){
+    string salida = "subgraph cluster_a {\n";
+    salida = salida + "style=filled;\ncolor=lightgrey;\nnode [style=filled,color=white];\n";
+    Nodo* aux = this->clientes->inicio;
+    if(aux != nullptr){
+        salida = salida + "Cliente_ID_" + to_string(aux->id);
+        while(aux->siguiente != nullptr){
+            salida = salida + " -> ";
+            salida = salida + "Cliente_ID_" + to_string(aux->id);
+            aux = aux->siguiente;
+        }
+        salida = salida + " -> ";
+        salida = salida + "Cliente_ID_" + to_string(aux->id);
+    }
+    salida = salida + "\nlabel = \"Cola de espera\n Clientes\"};\n\n\n";
+    return salida;
+}
+
+string SuperMarket::graficarCarretas1(){
+    string salida = "subgraph cluster_b {\n";
+    salida = salida + "style=filled;\ncolor=lightgrey;\nnode [style=filled,color=white];\n";
+    Nodo* aux = this->pilaCarreta1->inicio;
+    if(aux != nullptr){
+        salida = salida + "Carreta_ID_" + to_string(aux->id);
+        while(aux->siguiente != nullptr){
+            salida = salida + " -> ";
+            salida = salida + "Carreta_ID_" + to_string(aux->id);
+            aux = aux->siguiente;
+        }
+        salida = salida + " -> ";
+        salida = salida + "Carreta_ID_" + to_string(aux->id);
+    }
+    salida = salida + "\nlabel = \"Pila de carretas 1\"};\n\n\n";
+    return salida;
+}
+
+string SuperMarket::graficarCarretas2(){
+    string salida = "subgraph cluster_c {\n";
+    salida = salida + "style=filled;\ncolor=lightgrey;\nnode [style=filled,color=white];\n";
+    
+    Nodo* aux = this->pilaCarreta2->inicio;
+    if(aux != nullptr){
+        salida = salida + "Carreta_ID_" + to_string(aux->id);
+        while(aux->siguiente != nullptr){
+            salida = salida + " -> ";
+            salida = salida + "Carreta_ID_" + to_string(aux->id);
+            aux = aux->siguiente;
+        }
+        salida = salida + " -> ";
+        salida = salida + "Carreta_ID_" + to_string(aux->id);
+    }
+    
+    salida = salida + "\nlabel = \"Pila de carretas 2\"};\n\n\n";
+    return salida;
+}
+
+string SuperMarket::graficarColaDePagos(){
+    string salida = "subgraph cluster_d {\n";
+    salida = salida + "style=filled;\ncolor=lightgrey;\nnode [style=filled,color=white];\n";
+    if(!colaDePagos->estaVacia()){
+        Nodo* aux = this->colaDePagos->inicio;
+        if(aux != nullptr){
+            salida = salida + "Cliente_ID_" + to_string(aux->id);
+            while(aux->siguiente != nullptr){
+                salida = salida + " -> ";
+                salida = salida + "Carreta_ID_" + to_string(aux->id);
+                aux = aux->siguiente;
+            }
+            salida = salida + " -> ";
+            salida = salida + "Cliente_ID_" + to_string(aux->id);
+        }  
+    }
+    
+    
+    salida = salida + "\nlabel = \"Cola de espera para cajas\"};\n\n\n";
+    return salida;
+}
+
+string SuperMarket::graficarClientesComprando(){
+    string salida = "subgraph cluster_e {\n";
+    salida = salida + "style=filled;\ncolor=lightgrey;\nnode [style=filled,color=white];\n";
+    
+    Nodo* aux = this->clientesComprando->inicio;
+    Nodo* finl = this->clientesComprando->fin;
+    if(aux != nullptr){
+        salida = salida + "Cliente_ID_" + to_string(aux->id);
+        while(aux->siguiente != finl){
+            salida = salida + " -> ";
+            salida = salida + "Carreta_ID_" + to_string(aux->id);
+            aux = aux->siguiente;
+        }
+        salida = salida + " -> ";
+        salida = salida + "Cliente_ID_" + to_string(aux->id);
+        salida = salida + " -> ";
+        salida = salida + "Cliente_ID_" + to_string(this->clientesComprando->inicio->id);
+    }
+    
+    salida = salida + "\nlabel = \"Lista circular de clientes\"};\n\n\n";
+    return salida;
+}
+
+string SuperMarket::graficarCajas(){
+    string salida = "subgraph cluster_f {\n";
+    salida = salida + "style=filled;\ncolor=lightgrey;\nnode [style=filled,color=white];\n";
+    
+    cout<<"Graficando normal"<<endl;
+    NodoCaja* aux = this->cajas->inicio;
+    if(aux != nullptr){
+        salida = salida + "Caja_ID_" + to_string(aux->id);
+        while(aux->siguiente != nullptr){
+            salida = salida + " -> ";
+            salida = salida + "Caja_ID_" + to_string(aux->id);
+            aux = aux->siguiente;
+        }
+        salida = salida + " -> ";
+        salida = salida + "Caja_ID_" + to_string(aux->id) + ";\n";
+        
+        
+        aux = this->cajas->fin;
+        cout<<"Graficando inverso"<<endl;
+        salida = salida + "Caja_ID_" + to_string(aux->id);
+        while(aux->anterior != nullptr){
+            salida = salida + " -> ";
+            salida = salida + "Caja_ID_" + to_string(aux->id);
+            aux = aux->anterior;
+        }
+        if(aux != nullptr){
+            salida = salida + " -> ";
+            salida = salida + "Caja_ID_" + to_string(aux->id) + ";\n";
+        }
+        cout<<"Terminando de graficar cajas"<<endl;
+    }
+    
+    salida = salida + "\nlabel = \"Lista doble de cajas\";}\n\n\n";
+    return salida;
+}
+
+void SuperMarket::graphviz(string salida){
+  ofstream f2;
+  f2.open("grafico.dot", ofstream::out | ofstream::trunc);
+  f2<<salida;
+  f2<<endl;
+  system("dot -Tpng grafico.dot -o graficosupermarket");
+  f2.close();
+
 }

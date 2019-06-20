@@ -25,6 +25,7 @@ public:
     void insertar(NodoCaja* nodo);
     void borrar(int id);
     int estaVacia();
+    void graficar();
 };
 
 #endif /* LISTADOBLE_H */

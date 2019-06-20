@@ -33,14 +33,13 @@ Nodo* Cola::descolar(){
         total--;
         cout<<"Cliente "<<aux->id<<" salio de la cola"<<endl;
         return aux;
-    } else {
-        cout<<"Lista vacia";
-    }
+    } 
     
 }
 
 bool Cola::estaVacia() {
-    if(inicio == nullptr && fin == nullptr) {
+    if(total == 0) {
+        cout<<"La cola esta vacia"<<endl;
         return true;
     }
     return false;

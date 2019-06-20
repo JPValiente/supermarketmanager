@@ -12,15 +12,19 @@ Nodo *tope,*fondo;
 
 Pila::Pila(){
     tope = fondo = nullptr;
+    this->inicio = fondo;
+    this->fin = tope;
 }
 void Pila::apilar(Nodo*nodo){
     if(tope == nullptr && fondo == nullptr) {
         fondo = tope =  nodo;
+        inicio = fin = nodo;
     } else {
         nodo->siguiente = tope;
         tope = nodo;
+        fin = nodo;
     }
-    
+    this->total = this->total + 1;
 }
 
 Nodo* Pila::desapilar(){
@@ -29,13 +33,17 @@ Nodo* Pila::desapilar(){
         aux = tope;
         if(tope == fondo){
             tope = fondo = nullptr;
+            inicio = fin = nullptr;
         } else {
             tope = tope->siguiente;
+            fin = fin->siguiente;
         }
+        this->total = this->total - 1;
         return aux;
     } else {
         cout<<"Lista vacia";
     }
+    
 }
 
 void Pila::imprimirDatos(){

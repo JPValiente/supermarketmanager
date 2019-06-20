@@ -34,14 +34,14 @@ void NodoCaja::setStatus(bool flag){
 
 void NodoCaja::vaciarCaja() {
     this->ocupado = false;
-    this->cliente = nullptr;
+    free(this->cliente);
 }
 
 bool NodoCaja::cumplioTiempo() {
     time_t ahorita  = time(0);
-    if(ahorita <= this->tiempoLimite){
-        cout<<"Tiempo valido"<<endl;
+    if(ahorita >= this->tiempoLimite){
         return true;
+        cout<<"Tiempo Valido"<<endl;
     }
     return false;
 }

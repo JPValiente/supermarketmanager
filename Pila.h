@@ -18,11 +18,13 @@ class Pila {
 public:
     Nodo *inicio;
     Nodo *fin;
+    int total;
     Pila();
     void apilar (Nodo *nodo);
     Nodo* desapilar ();
     void imprimirDatos();
     bool estaVacia();
+    void graficar();
 };
 
 

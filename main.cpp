@@ -57,28 +57,40 @@ void simularSupermercado(int clientes, int cajas, int carretas){
     while(clientes > 0){
         conteo++;
         clientes = supermercado->clientes->total + supermercado->clientesComprando->totalElementos + supermercado->colaDePagos->total;
-        usleep(100000);
-        cout<<endl<<endl<<endl<<endl<<"Clientes en cola de espera: "<<clientes<<endl;
+        if(clientes == 0){
+            break;
+        }
+        sleep(2);
+        cout<<endl<<endl<<endl<<endl<<"Total de clientes en el sistema "<<clientes<<endl;
+        cout<<"Clientes en cola de espera: "<<supermercado->clientes->total<<endl;
         cout<<"Clientes comprando: "<<supermercado->clientesComprando->totalElementos<<endl;
         cout<<"Clientes en cola de pagos: "<<supermercado->colaDePagos->total<<endl;
+        cout<<"Total de carretas: "<<(supermercado->pilaCarreta1->total + supermercado->pilaCarreta2->total)<<endl;
         cout<<"######### Paso "<<conteo<<" #########"<<endl<<endl;
-        if(supermercado->hayCarretas()){
-            Nodo* carreta = supermercado->sacarCarreta();
-            Nodo* cliente = supermercado->clientes->descolar();
-            supermercado->asignarCarretaACliente(cliente,carreta);
-            supermercado->agregarACompras(cliente);
+        if(supermercado->hayCarretas() && !supermercado->clientes->estaVacia()){
+            //cout<<"Prueba 1"<<endl;
+                Nodo* carreta = supermercado->sacarCarreta();
+            //cout<<"Prueba 2"<<endl;
+                Nodo* cliente = supermercado->clientes->descolar();
+            //cout<<"Prueba 3"<<endl;    
+                supermercado->asignarCarretaACliente(cliente,carreta);
+            //cout<<"Prueba 4"<<endl;    
+                supermercado->agregarACompras(cliente);
             
+        } 
+        cout<<"Sacando de la lista circular"<<endl;
+        if(supermercado->clientesComprando->totalElementos > 0){
+            supermercado->clientesComprando->recorrerLista();
             Nodo* clienteSaliente = supermercado->sacarClienteDeCompras();
             if(clienteSaliente != nullptr){
+                cout<<"Cliente ingresando"<<endl;
                 supermercado->encolarCliente(clienteSaliente);
-                NodoCaja* caja = supermercado->asignarClienteACaja();
-                if(caja != nullptr){
-                    supermercado->atenderCajas(); //Aqui se combina de una vez el guardar la carreta, en liberar al cliente.
-                }   
+                supermercado->asignarClienteACaja();
+                supermercado->atenderCajas(); //Aqui se combina de una vez el guardar la carreta, en liberar al cliente.
+
             }
-        } else {
-            
         }
+        supermercado->graficar();
     }
     
     

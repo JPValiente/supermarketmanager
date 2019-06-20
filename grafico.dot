@@ -1,0 +1,54 @@
+digraph G {
+subgraph cluster_a {
+style=filled;
+color=lightgrey;
+node [style=filled,color=white];
+Cliente_ID_3 -> Cliente_ID_3 -> Cliente_ID_4 -> Cliente_ID_5
+label = "Cola de espera
+ Clientes"};
+
+
+subgraph cluster_b {
+style=filled;
+color=lightgrey;
+node [style=filled,color=white];
+
+label = "Pila de carretas 1"};
+
+
+subgraph cluster_c {
+style=filled;
+color=lightgrey;
+node [style=filled,color=white];
+
+label = "Pila de carretas 2"};
+
+
+subgraph cluster_d {
+style=filled;
+color=lightgrey;
+node [style=filled,color=white];
+
+label = "Cola de espera para cajas"};
+
+
+subgraph cluster_e {
+style=filled;
+color=lightgrey;
+node [style=filled,color=white];
+
+label = "Lista circular de clientes"};
+
+
+subgraph cluster_f {
+style=filled;
+color=lightgrey;
+node [style=filled,color=white];
+Caja_ID_1 -> Caja_ID_1 -> Caja_ID_2 -> Caja_ID_3;
+Caja_ID_3 -> Caja_ID_3 -> Caja_ID_2 -> Caja_ID_1;
+
+label = "Lista doble de cajas";}
+
+
+
+}

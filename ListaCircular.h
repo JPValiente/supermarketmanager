@@ -20,10 +20,14 @@ public:
     Nodo *inicio;
     Nodo *fin;
     int totalElementos;
+    int total;
     ListaCircular();
     void insertar(Nodo* nodo);
     Nodo* borrar(int id);
     int estaVacia();
+    Nodo* buscarNodo(int id);
+    void graficar();
+    void recorrerLista();
 };
 
 

@@ -22,6 +22,7 @@ public:
     int total;
     void encolar (Nodo *nodo);
     Nodo* descolar ();
+    void graficar();
     bool estaVacia();
 };
 

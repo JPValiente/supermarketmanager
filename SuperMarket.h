@@ -14,6 +14,7 @@
 #ifndef SUPERMARKET_H
 #define SUPERMARKET_H
 #include "Nodo.h"
+#include <string>
 #include "NodoCaja.h"
 #include "Pila.h"
 #include "Cola.h"
@@ -51,7 +52,14 @@ public:
     Nodo* crearCarreta(int id); //#Crea en memoria una carreta
     NodoCaja* crearCaja(int id); //#Crea en memoria una caja
     void atenderCajas(); //#Atiende al cliente en la caja
-    
+    void graficar();
+    std::string graficarClientes();
+    std::string graficarCarretas1();
+    std::string graficarCarretas2();
+    std::string graficarColaDePagos();
+    std::string graficarClientesComprando();
+    std::string graficarCajas();
+    void graphviz(std::string salida);
 };
 
 
